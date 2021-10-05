@@ -1,0 +1,9 @@
+*~
+*.bak
+.DS_Store
+*.tgz
+*.html
+
+/dist/*
+!/dist/.keep
+/node_modules
