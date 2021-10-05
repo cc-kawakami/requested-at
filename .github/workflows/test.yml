@@ -1,0 +1,35 @@
+name: test
+
+on:
+  push:
+    branches:
+      - 'releases/*'
+      - 'pull-req/*'
+      - 'dependabot/*'
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+  workflow_dispatch:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: install yarn
+        run: npm install -g yarn
+      - name: install npms /w yarn
+        run: yarn install
+      - name: lint
+        run: yarn run lint
+      - name: test
+        run: yarn run test
